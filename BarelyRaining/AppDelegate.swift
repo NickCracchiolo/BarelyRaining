@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        checkForNilUserDefaults()
         return true
     }
 
@@ -41,6 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    private func checkForNilUserDefaults() {
+        let defaultsURL = Bundle.main.url(forResource: "Defaults", withExtension: "plist")
+        let dictionary  = NSDictionary(contentsOf: defaultsURL!) as! Dictionary<String, Any>
+        UserDefaults.standard.register(defaults: dictionary)
+    }
 }
 
