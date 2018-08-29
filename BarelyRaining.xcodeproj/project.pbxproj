@@ -19,6 +19,8 @@
 		7A6FCA362137139D009F5690 /* WeatherAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6FCA312137139D009F5690 /* WeatherAlert.swift */; };
 		7A6FCA372137139D009F5690 /* DataBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6FCA322137139D009F5690 /* DataBlock.swift */; };
 		7A6FCA382137139D009F5690 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6FCA332137139D009F5690 /* Forecast.swift */; };
+		7A6FCA3B213713F5009F5690 /* WeatherSeverity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6FCA39213713F5009F5690 /* WeatherSeverity.swift */; };
+		7A6FCA3C213713F5009F5690 /* WeatherIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6FCA3A213713F5009F5690 /* WeatherIcon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		7A6FCA312137139D009F5690 /* WeatherAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherAlert.swift; sourceTree = "<group>"; };
 		7A6FCA322137139D009F5690 /* DataBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataBlock.swift; sourceTree = "<group>"; };
 		7A6FCA332137139D009F5690 /* Forecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
+		7A6FCA39213713F5009F5690 /* WeatherSeverity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherSeverity.swift; sourceTree = "<group>"; };
+		7A6FCA3A213713F5009F5690 /* WeatherIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherIcon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,8 +96,8 @@
 		7A6FCA2B21371320009F5690 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7A6FCA2E2137136A009F5690 /* Weather Enums */,
 				7A6FCA2D21371360009F5690 /* JSON Objects */,
+				7A6FCA2E2137136A009F5690 /* Weather Enums */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -121,6 +125,8 @@
 		7A6FCA2E2137136A009F5690 /* Weather Enums */ = {
 			isa = PBXGroup;
 			children = (
+				7A6FCA3A213713F5009F5690 /* WeatherIcon.swift */,
+				7A6FCA39213713F5009F5690 /* WeatherSeverity.swift */,
 			);
 			path = "Weather Enums";
 			sourceTree = "<group>";
@@ -197,11 +203,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A6FCA352137139D009F5690 /* FlagObject.swift in Sources */,
+				7A6FCA3B213713F5009F5690 /* WeatherSeverity.swift in Sources */,
 				7A6FCA362137139D009F5690 /* WeatherAlert.swift in Sources */,
 				7A6FCA1521371247009F5690 /* ViewController.swift in Sources */,
 				7A6FCA1321371247009F5690 /* AppDelegate.swift in Sources */,
 				7A6FCA382137139D009F5690 /* Forecast.swift in Sources */,
 				7A6FCA342137139D009F5690 /* DataPoint.swift in Sources */,
+				7A6FCA3C213713F5009F5690 /* WeatherIcon.swift in Sources */,
 				7A6FCA292137129A009F5690 /* UICollectionViewCellExtension.swift in Sources */,
 				7A6FCA2A2137129A009F5690 /* UITableViewCellExtension.swift in Sources */,
 				7A6FCA372137139D009F5690 /* DataBlock.swift in Sources */,
