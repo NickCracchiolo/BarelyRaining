@@ -11,7 +11,7 @@ import Foundation
 class NetworkManager {
     //Forecast Request: https://api.darksky.net/forecast/[key]/[lat],[lon]?[parameters]
     private let api = "https://api.darksky.net/forecast"
-    private let key = "d64ebf1c220fdb7c03e2ee110d09d4a4"
+    private let key = "<YOUR_KEY_HERE>"
     
     private lazy var decoder:JSONDecoder = {
         let decoder = JSONDecoder()
