@@ -52,27 +52,71 @@ enum WeatherIcon {
     func image() -> UIImage? {
         switch self {
         case .clearDay:
-            return UIImage(named: "clear-day")
+            if #available(iOS 13.0, *) {
+                return UIImage(systemName: "sun.min")
+            } else {
+                return UIImage(named: "clear-day")
+            }
         case .clearNight:
-            return UIImage(named: "clear-night")
+            if #available(iOS 13.0, *) {
+                return UIImage(systemName: "moon.stars")
+            } else {
+                return UIImage(named: "clear-night")
+            }
         case .rain:
-            return UIImage(named: "rain")
+            if #available(iOS 13.0, *) {
+                return UIImage(systemName: "cloud.rain")
+            } else {
+                return UIImage(named: "rain")
+            }
         case .snow:
-            return UIImage(named: "snow")
+            if #available(iOS 13.0, *) {
+                return UIImage(systemName: "snow")
+            } else {
+                return UIImage(named: "snow")
+            }
         case .sleet:
-            return UIImage(named: "sleet")
+            if #available(iOS 13.0, *) {
+                return UIImage(systemName: "wind.snow")
+            } else {
+                return UIImage(named: "sleet")
+            }
         case .wind:
-            return UIImage(named: "wind")
+            if #available(iOS 13.0, *) {
+                return UIImage(systemName: "wind")
+            } else {
+                return UIImage(named: "wind")
+            }
         case .fog:
-            return UIImage(named: "fog")
+            if #available(iOS 13.0, *) {
+                return UIImage(systemName: "cloud.fog")
+            } else {
+                return UIImage(named: "fog")
+            }
         case .cloudy:
-            return UIImage(named: "cloudy")
+            if #available(iOS 13.0, *) {
+                return UIImage(systemName: "cloud")
+            } else {
+                return UIImage(named: "cloudy")
+            }
         case .partyCloudyDay:
-            return UIImage(named: "partly-cloudy-day")
+            if #available(iOS 13.0, *) {
+                return UIImage(systemName: "cloud.sun")
+            } else {
+                return UIImage(named: "partly-cloudy-day")
+            }
         case .partyCloudyNight:
-            return UIImage(named: "partly-cloudy-night")
+            if #available(iOS 13.0, *) {
+                return UIImage(systemName: "cloud.moon")
+            } else {
+                return UIImage(named: "partly-cloudy-night")
+            }
         case .other:
-            return UIImage(named: "other")
+            if #available(iOS 13.0, *) {
+                return UIImage(systemName: "globe")
+            } else {
+                return UIImage(named: "other")
+            }
         }
     }
 }

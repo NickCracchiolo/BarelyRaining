@@ -7,16 +7,25 @@
 //
 
 import UIKit
+import BackgroundTasks
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    private let model:ForecastDataModel = ForecastDataModel()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        checkForNilUserDefaults()
+        self.checkForNilUserDefaults()
+        if #available(iOS 13.0, *) {
+            self.registerBGTasks()
+        }
+        guard let root = self.window?.rootViewController as? UINavigationController else { return false }
+        if let vc = root.viewControllers.first as? WeatherViewController {
+            vc.dataModel = self.model
+        }
         return true
     }
 
@@ -28,6 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        if #available(iOS 13.0, *) {
+            self.scheduleAppRefresh()
+        }
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -46,6 +58,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let defaultsURL = Bundle.main.url(forResource: "Defaults", withExtension: "plist")
         let dictionary  = NSDictionary(contentsOf: defaultsURL!) as! Dictionary<String, Any>
         UserDefaults.standard.register(defaults: dictionary)
+    }
+    
+    @available(iOS 13.0, *)
+    private func registerBGTasks() {
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: "com.njc.app.BarelyRaining.refresh", using: DispatchQueue.global()) { (task) in
+            self.handleAppRefresh(task)
+        }
+    }
+    
+    @available(iOS 13.0, *)
+    private func handleAppRefresh(_ task:BGTask) {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        queue.addOperation {
+            self.model.reload()
+        }
+
+        task.expirationHandler = {
+            queue.cancelAllOperations()
+        }
+
+        let lastOperation = queue.operations.last
+        lastOperation?.completionBlock = {
+            task.setTaskCompleted(success: !(lastOperation?.isCancelled ?? false))
+        }
+
+        scheduleAppRefresh()
+    }
+    
+    @available(iOS 13.0, *)
+    private func scheduleAppRefresh() {
+        do {
+            let request = BGAppRefreshTaskRequest(identifier: "com.njc.app.BarelyRaining.refresh")
+            request.earliestBeginDate = Date(timeIntervalSinceNow: 3600)
+            try BGTaskScheduler.shared.submit(request)
+        } catch {
+            print(error)
+        }
     }
 }
 

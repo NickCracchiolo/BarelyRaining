@@ -18,7 +18,18 @@ class HourlyCollectionCell: UICollectionViewCell {
         super.layoutSubviews()
         self.roundedView.layer.cornerRadius = 5.0
         self.roundedView.layer.borderWidth = 2.0
-        self.roundedView.layer.borderColor = UIColor.black.cgColor
+        
+        if #available(iOS 13.0, *) {
+            self.roundedView.layer.borderColor = UIColor.label.cgColor
+            self.roundedView.backgroundColor = .systemBackground
+            self.backgroundColor = .systemBackground
+            self.timeLabel.textColor = .label
+            self.tempLabel.textColor = .label
+            self.icon.tintColor = .label
+        } else {
+            self.roundedView.layer.borderColor = UIColor.black.cgColor
+            self.icon.tintColor = .black
+        }
     }
     
     lazy var formatter:DateFormatter = {

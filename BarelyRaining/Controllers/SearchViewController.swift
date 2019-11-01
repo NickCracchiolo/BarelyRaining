@@ -25,6 +25,11 @@ class SearchViewController: UIViewController {
         self.searchBar.delegate = self
         self.searchBar.placeholder = "Search for an Address, Zip, City, etc"
         self.previousLocations = Array(dataModel.previousLocations)
+        if #available(iOS 13.0, *) {
+            self.view.backgroundColor = .systemBackground
+        } else {
+            self.view.backgroundColor = .white
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

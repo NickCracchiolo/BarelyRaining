@@ -12,7 +12,7 @@ class CurrentWeatherCell: UITableViewCell {
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var tempLabel: UILabel!
     //@IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var summaryLabel: UILabel!
+    //@IBOutlet weak var summaryLabel: UILabel!
     @IBOutlet weak var feelsLikeLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var precipitationLabel: UILabel!
@@ -24,7 +24,7 @@ class CurrentWeatherCell: UITableViewCell {
             self.icon.image = nil
             self.tempLabel.text = "--˚"
             self.feelsLikeLabel.text = nil
-            self.summaryLabel.text = ""
+            //self.summaryLabel.text = ""
             self.humidityLabel.text = "Humidity: --%"
             self.precipitationLabel.text = "Precipitation: --%"
             self.uvLabel.text = "UV Index: --"
@@ -34,6 +34,11 @@ class CurrentWeatherCell: UITableViewCell {
         
         if let i = d.icon {
             self.icon.image = WeatherIcon(withName: i).image()
+            if #available(iOS 13.0, *) {
+                self.icon.tintColor = .label
+            } else {
+                self.icon.tintColor = .black
+            }
         } else {
             self.icon.image = nil
         }
@@ -47,11 +52,11 @@ class CurrentWeatherCell: UITableViewCell {
         } else {
             self.feelsLikeLabel.text = nil
         }
-        if let summary = d.summary {
-            self.summaryLabel.text = summary
-        } else {
-            self.summaryLabel.text = ""
-        }
+//        if let summary = d.summary {
+//            self.summaryLabel.text = summary
+//        } else {
+//            self.summaryLabel.text = ""
+//        }
         
         if let humid = d.humidity {
             self.humidityLabel.text = "Humidity: " + String(format: "%.0f", roundf(humid * 100)) + "%"

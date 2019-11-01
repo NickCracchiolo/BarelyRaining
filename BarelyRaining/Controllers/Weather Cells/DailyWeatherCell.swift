@@ -20,6 +20,11 @@ class DailyWeatherCell: UITableViewCell {
     func setup(withData data:DataPoint) {
         if let i = data.icon {
             icon.image = WeatherIcon(withName: i).image()
+            if #available(iOS 13.0, *) {
+                self.icon.tintColor = .label
+            } else {
+                self.icon.tintColor = .black
+            }
         } else {
             icon.image = nil
         }

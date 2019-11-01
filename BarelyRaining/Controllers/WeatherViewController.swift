@@ -8,18 +8,33 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController {
-    @IBOutlet weak var tableView: UITableView!
+final class WeatherViewController: UIViewController {
+    // MARK: Properties
     // DataModel pulls data from DarkSky API
-    private let dataModel:ForecastDataModel = ForecastDataModel()
+    var dataModel:ForecastDataModel!
     
     // Temp UITableView sources updated by dataModel
-    var forecast:Forecast?
-    var daily:[DataPoint] = []
-    var hourly:[DataPoint] = []
+    private var forecast:Forecast?
+    private var daily:[DataPoint] = []
+    private var hourly:[DataPoint] = []
+    
+    // MARK: UI Elements
+    @IBOutlet weak var tableView: UITableView!
+    
+    private lazy var refreshControl: UIRefreshControl = {
+        let control = UIRefreshControl()
+        control.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
+        return control
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 13.0, *) {
+            self.view.backgroundColor = .systemBackground
+        } else {
+            self.view.backgroundColor = .white
+        }
+        self.tableView.addSubview(self.refreshControl)
         dataModel.delegate = self
         dataModel.setDefaultLocation()
     }
@@ -41,9 +56,14 @@ class WeatherViewController: UIViewController {
         }
     }
     
-    @IBAction func refreshWeather(_ sender: UIBarButtonItem) {
-        print("Refreshing")
+    // MARK: Actions
+    @objc func handleRefresh(_ sender:UIRefreshControl) {
         dataModel.reload()
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
+        }
     }
     
     @IBAction func unwindToMainView(segue: UIStoryboardSegue) {

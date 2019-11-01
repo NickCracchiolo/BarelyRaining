@@ -28,13 +28,11 @@ class NetworkManager {
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let e = error {
                 print("Error fetching data: \(e.localizedDescription)")
-                completion(nil, e)
-                return
+                return completion(nil, e)
             }
             guard let d = data else {
                 print("Error: There was no data available!")
-                completion(nil, nil)
-                return
+                return completion(nil, nil)
             }
             //print("JSON: \(String(describing: self.json(fromData: data)))")
             do {
