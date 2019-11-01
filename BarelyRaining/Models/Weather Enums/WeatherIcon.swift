@@ -77,7 +77,7 @@ enum WeatherIcon {
             }
         case .sleet:
             if #available(iOS 13.0, *) {
-                return UIImage(systemName: "wind.snow")
+                return UIImage(systemName: "cloud.sleet")
             } else {
                 return UIImage(named: "sleet")
             }
